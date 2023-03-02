@@ -11,6 +11,13 @@
 
 /* Header section */
 /* short-by-date-btn */
-.short-by-date-btn:hover{
+/* #short-by-date-btn:hover{
     background-color: brown;
+} */
+
+
+/* Display Ai Section */
+.ai-detail-btn:hover{
+    background-color: rgb(206, 66, 66);
+    color: white;
 }
