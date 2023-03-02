@@ -29,6 +29,7 @@ const displayAi = (data) =>{
                                 <h5 class=" my-2 fs-3 fw-semibold">${ai.name}</h5>
                                 <p class="m-0 text-secondary">
                                     <i class="fa-regular fa-calendar-days"></i>
+                                    ${ai.published_in}
                                 </p>
                             </div>
                             <div>
