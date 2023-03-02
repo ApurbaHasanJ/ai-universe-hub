@@ -10,7 +10,7 @@ const displayAi = (data) =>{
     data.forEach( ai => {
         const aiDiv = document.createElement('div');
         aiDiv.classList.add('col');
-        console.log(ai.image)
+        console.log(ai)
         aiDiv.innerHTML= `
         <div class="card p-3 shadow">
                     <img class="img-fluid" src="${ai.image}" class="card-img-top mb-3" alt="..." style="height: 300px; width: 437px;">
@@ -18,15 +18,15 @@ const displayAi = (data) =>{
                         <div>
                             <h5 class=" my-2 fs-3 fw-semibold">Features</h5>
                             <ol class="text-secondary ps-4">
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
+                                <li>${ai.features[0]}</li>
+                                <li>${ai.features[1]}</li>
+                                <li>${ai.features[2]}</li>
                             </ol>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="">
-                                <h5 class=" my-2 fs-3 fw-semibold">AI Name</h5>
+                                <h5 class=" my-2 fs-3 fw-semibold">${ai.name}</h5>
                                 <p class="m-0 text-secondary">
                                     <i class="fa-regular fa-calendar-days"></i>
                                 </p>
