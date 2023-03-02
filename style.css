@@ -1,0 +1,11 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+
+*{
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
