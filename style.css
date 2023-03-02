@@ -9,3 +9,8 @@
     font-family: 'Work Sans', sans-serif;
 }
 
+/* Header section */
+/* short-by-date-btn */
+.short-by-date-btn:hover{
+    background-color: brown;
+}
