@@ -34,3 +34,8 @@ body{
     width: 137px;
     height: 100px;
 }
+
+.accuracy-btn{
+    top: 10px;
+    right: 10px;
+}

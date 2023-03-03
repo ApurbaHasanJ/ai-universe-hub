@@ -72,7 +72,22 @@ const showAiDetails = aiDetails =>{
     const modalAiDiv = document.getElementById('modal-ai-details');
     
     console.log(aiDetails)
-    const {description, pricing, image_link, input_output_examples, features, integrations} = aiDetails;
+    const {description, pricing, image_link, input_output_examples, features, integrations, accuracy
+    } = aiDetails;
+
+
+    const aiAccuracy = () =>{
+      if(aiDetails.accuracy.score > 0){
+        return aiDetails.accuracy.score * 100 + '% accuracy';
+        
+      }
+      else{
+        return '';
+      }
+    } 
+      
+    
+    
     modalAiDiv.innerHTML = `
     <div class="modal-header">
                   <button type="button" class="btn-close bg-danger text-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -108,10 +123,19 @@ const showAiDetails = aiDetails =>{
                   </div>
                   <!-- AI Photo and MSG -->
                   <div class="col p-3 border border-secondary rounded-3">
-                    <img src="${image_link[0]}" class="card-img-top rounded-3" alt="...">
+                    <div class="position-relative">
+                      <img src="${image_link[0]}" class="card-img-top rounded-4" alt="...">
+                      
+                      <button class="btn btn-danger accuracy-btn position-absolute ">${aiAccuracy()}</button>
+
+                    </div>
                       <div class="card-body mt-3">
-                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples[0]?.input || 'Can you give any example?'}</p>
-                        <p class="card-text text-center">${input_output_examples[0]?.output || 'No! Not Yet! Take a break!!!'}</p>
+                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples !== null && input_output_examples.length > 0 ? input_output_examples[0].input : 'Can you give any example?'}</p>
+                        <p class="card-text text-center">${input_output_examples !== null && input_output_examples.length > 0 ? input_output_examples[0].output : 'No examples available.'}</p>
+
+
+                        
+
                       </div>
                   </div>
                 </div>
