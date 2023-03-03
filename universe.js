@@ -70,8 +70,9 @@ const loadAiDetails = id => {
 
 const showAiDetails = aiDetails =>{
     const modalAiDiv = document.getElementById('modal-ai-details');
+    
     console.log(aiDetails)
-    const {description, pricing, image_link, input_output_examples} = aiDetails;
+    const {description, pricing, image_link, input_output_examples, features, integrations} = aiDetails;
     modalAiDiv.innerHTML = `
     <div class="modal-header">
                   <button type="button" class="btn-close bg-danger text-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -82,25 +83,25 @@ const showAiDetails = aiDetails =>{
                     <h2 class="card-title fw-semibold mb-4">${description}</h2>
                     <!-- Payment Price -->
                     <div class="d-flex justify-content-around align-items-center mb-4">
-                      <div class=" d-flex justify-content-center align-items-center modal-price-box rounded-4 bg-white text-success">${pricing[0] ? pricing[0].price : 'Free Of Cost'}</div>
-                      <div class=" d-flex justify-content-center align-items-center modal-price-box rounded-4 bg-white text-warning">P2</div>
-                      <div class=" d-flex justify-content-center align-items-center modal-price-box rounded-4 bg-white text-danger-emphasis">P3</div>
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-success">${pricing[0].price ? pricing[0].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-warning">${pricing[1].price ? pricing[1].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-danger-emphasis">${pricing[2].price ? pricing[2].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <h2 class="fw-semibold fs-2 mb-3">Features</h2>
                         <ul>
-                          <li></li>
-                          <li></li>
-                          <li></li>
+                          <li>${features[1].feature_name}</li>
+                          <li>${features[2].feature_name}</li>
+                          <li>${features[1].feature_name}</li>
                         </ul>
                       </div>
                       <div class="col">
                         <h2 class="fw-semibold fs-2 mb-3">Integrations</h2>
                         <ul>
-                          <li></li>
-                          <li></li>
-                          <li></li>
+                          <li>${integrations?.[0] || 'No Data Found'}</li>
+                          <li>${integrations?.[1] || 'No Data Found'}</li>
+                          <li>${integrations?.[2] || 'No Data Found'}</li>
                         </ul>
                       </div>
                     </div>
@@ -109,8 +110,8 @@ const showAiDetails = aiDetails =>{
                   <div class="col p-3 border border-secondary rounded-3">
                     <img src="${image_link[0]}" class="card-img-top rounded-3" alt="...">
                       <div class="card-body mt-3">
-                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples[0].input}</p>
-                        <p class="card-text text-center">${input_output_examples[0].output}</p>
+                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples[0]?.input || 'Can you give any example?'}</p>
+                        <p class="card-text text-center">${input_output_examples[0]?.output || 'No! Not Yet! Take a break!!!'}</p>
                       </div>
                   </div>
                 </div>
