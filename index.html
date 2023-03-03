@@ -15,10 +15,11 @@
     <link rel="stylesheet" href="style.css">
 
   </head>
-  <body onload="loadAi()">
+  <!-- <body onload="loadAi()" class= "mx-auto"> -->
+  <body class= "mx-auto">
     <!-- Header Start -->
     <header>
-        <h1 class="fs-1 mt-5 fw-semibold text-center">AI Universe Hub</h1>
+        <h1 class="fs-1 mt-5 fw-semibold text-center rounded-5 bg-danger-subtle p-4">AI Universe Hub</h1>
         <div class="mb-4 d-flex justify-content-center">
             <button id="short-by-date-btn" type="button" class="btn btn-danger hover:shadow-lg btn-lg rounded-4 p-3 my-4">Sort By Date</button>
         </div>
@@ -31,34 +32,17 @@
 
         <!-- All AI Section -->
         <section class="mb-5">
-            <div id="ai-container" class="row row-cols-1 row-cols-md-3 mx-3 g-4">
-                <!-- <div class="col ">
-                  <div class="card">
-                    <img src="..." class="card-img-top mb-3" alt="...">
-                    <div class="card-body">
-                        <div>
-                            <h5 class=" my-2 fs-3 fw-semibold">Features</h5>
-                            <ol class="text-secondary ps-4">
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                            </ol>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="">
-                                <h5 class=" my-2 fs-3 fw-semibold">AI Name</h5>
-                                <p class="m-0 text-secondary">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </p>
-                            </div>
-                            <div>
-                                <i id="ai-detail-btn" class="fa-solid fa-arrow-right bg-danger-subtle p-3 text-danger rounded-circle"></i>
-                            </div>
-                        </div>      
-                    </div>
-                  </div>
-                </div> -->
+
+            <!-- Display AI -->
+            <div id="ai-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-3 g-4">
+
+                <!-- Here All AI -->
+
+            </div>
+
+            <!-- See More Btn -->
+            <div class="mb-4 d-flex justify-content-center mt-4">
+                <button id="see-more-btn" type="button" class="btn btn-danger hover:shadow-lg btn-lg rounded-4 px-5 py-3 my-4">See More</button>
             </div>
             
         </section>
