@@ -26,3 +26,11 @@ body{
     background-color: rgb(206, 66, 66);
     color: white;
 }
+
+
+/* Modal */
+/* modal-price-box */
+.modal-price-box{
+    width: 137px;
+    height: 100px;
+}
