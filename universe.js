@@ -1,8 +1,13 @@
+let fetchData = [];
+console.log(fetchData)
 const loadAi = (dataLimit) =>{
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     fetch(url)
-    .then(res => res.json())
-    .then(data => displayAi(data.data.tools, dataLimit))
+    .then((res) => res.json())
+    .then((data) => {
+      fetchData = data.data.tools;
+      displayAi(data.data.tools, dataLimit)
+    })
 }
 
 const displayAi = (data , dataLimit) =>{
@@ -44,7 +49,7 @@ const displayAi = (data , dataLimit) =>{
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="">
                                 <h5 class=" my-2 fs-3 fw-semibold">${name}</h5>
-                                <p class="m-0 text-secondary">
+                                <p id="published-date" class="m-0 text-secondary">
                                     <i class="fa-regular fa-calendar-days"></i>
                                     ${published_in}
                                 </p>
@@ -57,8 +62,21 @@ const displayAi = (data , dataLimit) =>{
                   </div>
         `;
         aiContainer.appendChild(aiDiv);
-    });
+    })
+    toggleSpinner(false)
 }
+
+// toggle Spinner
+const toggleSpinner = isLoading =>{
+  const loaderSection =document.getElementById('loader');
+  if(isLoading){
+    loaderSection.classList.remove('d-none')
+  }
+  else{
+    loaderSection.classList.add('d-none')
+  }
+}
+
 
 const loadAiDetails = id => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
@@ -98,9 +116,10 @@ const showAiDetails = aiDetails =>{
                     <h2 class="card-title fw-semibold mb-4">${description}</h2>
                     <!-- Payment Price -->
                     <div class="d-flex justify-content-around align-items-center mb-4">
-                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-success">${pricing[0].price ? pricing[0].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
-                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-warning">${pricing[1].price ? pricing[1].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
-                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-danger-emphasis">${pricing[2].price ? pricing[2].price : 'Free Of Cost'}<br>${pricing[0].plan}</div>
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-success">${pricing? pricing[0].price : 'free of cost'}<br>${pricing? pricing[0].plan : 'Basic'}</div>
+
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-warning">${pricing? pricing[1].price : 'free of cost'}<br>${pricing? pricing[1].plan : 'Basic'}</div>
+                      <div class=" d-flex fs-5 p-2 fw-semibold justify-content-center align-items-center modal-price-box rounded-4 bg-white text-danger-emphasis">${pricing? pricing[2].price : 'free of cost'}<br>${pricing? pricing[2].plan : 'Basic'}</div>
                     </div>
                     <div class="row">
                       <div class="col">
@@ -114,9 +133,12 @@ const showAiDetails = aiDetails =>{
                       <div class="col">
                         <h2 class="fw-semibold fs-2 mb-3">Integrations</h2>
                         <ul>
-                          <li>${integrations?.[0] || 'No Data Found'}</li>
-                          <li>${integrations?.[1] || 'No Data Found'}</li>
-                          <li>${integrations?.[2] || 'No Data Found'}</li>
+                          <li>${integrations? integrations?.[0] : 'No Data Found'}</li>
+                          <li>${integrations? integrations?.[1] : 'No Data Found'}</li>
+                          <li>${integrations? integrations?.[2] : 'No Data Found'}</li>
+
+                          
+
                         </ul>
                       </div>
                     </div>
@@ -130,17 +152,54 @@ const showAiDetails = aiDetails =>{
 
                     </div>
                       <div class="card-body mt-3">
-                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples !== null && input_output_examples.length > 0 ? input_output_examples[0].input : 'Can you give any example?'}</p>
-                        <p class="card-text text-center">${input_output_examples !== null && input_output_examples.length > 0 ? input_output_examples[0].output : 'No examples available.'}</p>
+                        <p class="card-text text-center fs-2 fw-semibold">${input_output_examples === null ? 'Can you give any example?' : input_output_examples[0].input}</p>
+                        <p class="card-text text-center">${input_output_examples === null ? 'No! Not Yet! Take a break!!!' : input_output_examples[0].output}</p>
 
 
-                        
+                      
 
                       </div>
                   </div>
                 </div>
     `;
 }
+
+
+
+// const textEl = document.getElementById('short-by-date-btn');
+
+// const date = new Date(`${aiContainer. published_in}`);
+// const date2 = new Date(1998, 3, 25);
+// const date3 = new Date(2003, 3, 25);
+// const date4 = new Date(2007, 3, 25);
+// console.log(date)
+
+// const dateArr = [date, date2, date3, date4];
+
+// // Descending order
+// const sortedArrDes = dateArr.sort((a, b) => b.getTime() - a.getTime()); // Descending order
+// const sortedDates = sortedArrDes.map((a) => new Date(a));
+// sortedDates.forEach((a) => (textEl.textContent += `${a} |****| `));
+
+// function sortByDate() {
+//   const cardList = document.getElementById('published-date'); // get the card list element
+//   const cards = cardList.children; // get all the card elements
+  
+//   // convert HTML collection to an array and sort it by date attribute
+//   const sortedCards = Array.from(cards).sort((a, b) => {
+//     const aDate = new Date(a.getAttribute('data-date'));
+//     const bDate = new Date(b.getAttribute('data-date'));
+//     return aDate - bDate;
+//   });
+
+//   // clear card list and append sorted cards to it
+//   cardList.innerHTML = '';
+//   sortedCards.forEach(card => cardList.appendChild(card));
+// }
+
+// const sortByDateBtn = document.getElementById('short-by-date-btn');
+// sortByDateBtn.addEventListener('click', sortByDate);
+
 // loadAiDetails(id)
 
 loadAi(6); 
