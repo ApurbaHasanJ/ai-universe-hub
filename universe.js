@@ -2,6 +2,7 @@ let fetchData = [];
 let currentDataLimit = 6;
 let isSortedByDate = false;
 
+// fetch Ai Data
 const loadAi = (dataLimit) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
@@ -18,6 +19,7 @@ const displayAi = (data, sortBy = '') => {
   // Clear previous AI data
   aiContainer.innerHTML = "";
 
+  // get see more button
   const seeMoreButton = document.getElementById("see-more-btn");
   seeMoreButton.addEventListener("click", () => {
     currentDataLimit += 6;
@@ -27,6 +29,8 @@ const displayAi = (data, sortBy = '') => {
     }
   });
 
+
+  // get all particular data
   data.forEach((ai) => {
     const { published_in, image, name, features, id } = ai;
     const aiDiv = document.createElement("div");
@@ -65,6 +69,8 @@ const displayAi = (data, sortBy = '') => {
   toggleSpinner(false);
 };
 
+
+// set function for Toggle spinner
 const toggleSpinner = (isLoading) => {
   const loaderSection = document.getElementById("loader");
   if (isLoading) {
@@ -75,6 +81,7 @@ const toggleSpinner = (isLoading) => {
 };
 
 
+// Loading Ai details
 const loadAiDetails = id => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
   // console.log(url)
@@ -93,11 +100,15 @@ const showAiDetails = aiDetails =>{
 
   const aiAccuracy = () =>{
     if(aiDetails.accuracy.score > 0){
-      return aiDetails.accuracy.score * 100 + '% accuracy';
+      return aiDetails.accuracy.score * 100 + '% Accuracy';
       
     }
     else{
-      return '';
+      const elementToHide = document.getElementById('aiAccuracy');
+    // Add the d-none class to the element's class list
+    elementToHide.classList.add('d-none');
+    // Return an empty string or null to avoid showing any text
+    return '';
     }
   } 
     
@@ -129,38 +140,31 @@ const showAiDetails = aiDetails =>{
                     </div>
                     <div class="col">
                       <h2 class="fw-semibold fs-2 mb-3">Integrations</h2>
-                      <ul>
-                        <li>${integrations? integrations?.[0] : 'No Data Found'}</li>
-                        <li>${integrations? integrations?.[1] : 'No Data Found'}</li>
-                        <li>${integrations? integrations?.[2] : 'No Data Found'}</li>
-
-                        
-
-                      </ul>
+                      ${integrations?.length > 0 ?
+                        `<ul>${integrations.map((item) => `<li>${item ?? 'No Data Found'}</li>`).join('')}</ul>` :
+                        'No Data Found'}
+                      
                     </div>
                   </div>
                 </div>
                 <!-- AI Photo and MSG -->
                 <div class="col p-3 border border-secondary rounded-3">
                   <div class="position-relative">
-                    <img src="${image_link[0]}" class="card-img-top rounded-4" alt="...">
-                    
-                    <button class="btn btn-danger accuracy-btn position-absolute ">${aiAccuracy()}</button>
+                    <img src="${image_link[0]}" class="card-img-top rounded-4" alt="...">  
+                    <button id="aiAccuracy" class="btn btn-danger accuracy-btn position-absolute ">${aiAccuracy()}
+                    </button>
 
                   </div>
                     <div class="card-body mt-3">
                       <p class="card-text text-center fs-2 fw-semibold">${input_output_examples === null ? 'Can you give any example?' : input_output_examples[0].input}</p>
                       <p class="card-text text-center">${input_output_examples === null ? 'No! Not Yet! Take a break!!!' : input_output_examples[0].output}</p>
-
-
-                    
-
                     </div>
                 </div>
               </div>
   `;
 }
 
+// Sort by Date function
 const sortByDate = () => {
   isSortedByDate = true;
   displayAi(getSortedData(fetchData.slice(0, currentDataLimit)), 'date');
@@ -178,4 +182,3 @@ const getSortedData = (data) => {
   }
 };
 
-loadAi(currentDataLimit);
