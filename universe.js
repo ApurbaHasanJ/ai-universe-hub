@@ -98,19 +98,13 @@ const showAiDetails = aiDetails =>{
   } = aiDetails;
 
 
-  const aiAccuracy = () =>{
-    if(aiDetails.accuracy.score > 0){
-      return aiDetails.accuracy.score * 100 + '% Accuracy';
-      
+  const aiAccuracy = () => {
+    if (aiDetails.accuracy?.score > 0) {
+      return `${aiDetails.accuracy.score * 100}% Accuracy`;
+    } else {
+      return null;
     }
-    else{
-      const elementToHide = document.getElementById('aiAccuracy');
-    // Add the d-none class to the element's class list
-    elementToHide.classList.add('d-none');
-    // Return an empty string or null to avoid showing any text
-    return '';
-    }
-  } 
+  }
     
   
   
@@ -151,8 +145,8 @@ const showAiDetails = aiDetails =>{
                 <div class="col p-3 border border-secondary rounded-3">
                   <div class="position-relative">
                     <img src="${image_link[0]}" class="card-img-top rounded-4" alt="...">  
-                    <button id="aiAccuracy" class="btn btn-danger accuracy-btn position-absolute ">${aiAccuracy()}
-                    </button>
+                    <button id="aiAccuracy" class="btn btn-danger accuracy-btn position-absolute ${aiAccuracy() ? '' : 'd-none'}">${aiAccuracy()}</button>
+
 
                   </div>
                     <div class="card-body mt-3">
