@@ -1,3 +1,3 @@
 # ai-universe-hub
-# Hosted in Netlify -> [HeroGadget](https://ai-universe-apurbahasanj.netlify.app/)
+# Hosted in Netlify -> [AI Universe Hub](https://ai-universe-apurbahasanj.netlify.app/)
 ----
